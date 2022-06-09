@@ -15,7 +15,7 @@
                  {{scope}}
              </template>
          </my-table>-->
-        <MyDialog :visible.sync="dialog.visible" :title="dialog.title" :fullscreen="dialog.fullscreen"
+        <!-- <MyDialog :visible.sync="dialog.visible" :title="dialog.title" :fullscreen="dialog.fullscreen"
                   :bt-list="dialog.btList">
             sss
         </MyDialog>
@@ -28,7 +28,9 @@
 
         </my-tree>
         <TreeSelect v-model ='valueSelect' :treeData='treeInfo.data' :dataType='dataType'  @handleClick="handleClick">
-        </TreeSelect>
+        </TreeSelect> -->
+        <!-- 测试编辑表格 -->
+        <form-table :formTableInfo="formTableInfo"></form-table>
     </div>
 
 </template>
@@ -39,6 +41,7 @@
     import MyDialog from "@/commons/dialog/index"
     import MyTree from "@/commons/tree/index"
     import TreeSelect from "@/commons/treeSelect/index"
+    import formTable from  '@/commons/formTable/index'
     import '@/util/vaildate.js'
 
 
@@ -51,7 +54,8 @@
             MyTable,
             MyDialog
             , MyTree,
-            TreeSelect
+            TreeSelect,
+            formTable
             // ItemFrom,
         },
         data() {
@@ -381,7 +385,19 @@
                         event: 'refresh',
                         show: true
                     },{label:"测试",event:"delete",show:true}]
-                }
+                },
+                 formTableInfo:{
+          data:[{ fileName:"",fileSum:"",chapterMain:"",chapterLocation:'',chapterSum:'',chapterType:''}],
+          fieldList:[{label:"文件名称",type:'input',value:"fileName",required:true},{label:"文件份数",type:'input',value:"fileSum",required:true},
+            {label:"用章主体",type:'input',value:"chapterMain",list:"chapterMainList",required:true},  {label:"用章类型",type:'input',value:"chapterType",required:true},
+            {label:"用章位置",type:'input',value:"chapterLocation",list:'chapterLocationList',width:130,required:true},{label:"用章个数",value:"chapterSum",type:"input",width:100}],
+          handle:{
+            width:80,
+            btList:[{
+              label:"删除",icon:'el-icon-delete',type:"text",event:"delete",showText:true,disabled:false
+            }]
+          }
+        }
             };
         },
         watch:{
